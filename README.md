@@ -1,17 +1,21 @@
-# hipsternet
-All the hipster things in Neural Net in a single repo: hipster optimization algorithms, hispter regularizations, everything!
+# Deep Learning
 
-Note, things will be added over time, so not all the hipsterest things will be here immediately. Also don't use this for your production code: use this to study and learn new things in the realm of Neural Net, Deep Net, Deep Learning, whatever.
+This repository was initially forked-of from wisetod-hipsternet.
+The credit goes to him for the most basic implementation of the DL algorithms such as optimization algorithms, and regularizations.
 
-## What's in it?
+On top of the existing approaches, my own implementation approaches and DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and ',ipynb' Python Notbook files for more readability and maintainability. 
+
+This repository will be improved, maintained, and debugged over time. 
+This repository is not meant for the production but prototyping.
+That being said, you can use it to better study and learn the theoretical foundation of deep learning in Neural Networds.
 
 #### Network Architectures
 
-1. Convolutional Net
-2. Feed Forward Net
-3. Recurrent Net
-4. LSTM Net
-5. GRU Net
+1. Convolutional NN
+2. Feed Forward NN
+3. Recurrent NN
+4. LSTM NN
+5. GRU NN
 
 #### Optimization algorithms
 
@@ -52,18 +56,16 @@ Note, things will be added over time, so not all the hipsterest things will be h
 1. Max pooling
 2. Average pooling
 
-## How to run this?
+## Run
 
-1. Install miniconda <http://conda.pydata.org/miniconda.html>
+1. Install anaconda/miniconda
 2. Do `conda env create`
-3. Enter the env `source activate hipsternet`
+3. Enter the env `source activate arasdar-DL-env`
 4. [Optional] To install Tensorflow: `chmod +x tensorflow.sh; ./tensorflow.sh`
-5. Do things with the code if you want to
-6. To run the example:
+5. To run, you can use either the ipynb files or the python files as following:
   1. `python run_mnist.py {ff|cnn}`; `cnn` for convnet model, `ff` for the feed forward model
   2. `python run_rnn.py {rnn|lstm|gru}`; `rnn` for vanilla RNN model, `lstm` for LSTM net model, `gru` for GRU net model
-7. Just close the terminal if you done (or `source deactivate`, not a fan though)
 
-## What can I do with this?
+## License
 
-Do anything you want. I licensed this with Unlicense License <http://unlicense.org>, as I need to take a break of using WTFPL license.
+This repository follows the same license as the parent repository 'hipsternet', i.e Unlicense License <http://unlicense.org>.
