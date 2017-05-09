@@ -1,13 +1,12 @@
 # Deep Learning
 
-This repository was initially forked-of from wisetod-hipsternet.
+This repository was initially forked-of from wiseodd-hipsternet.
 The credit goes to him for the most basic implementation of the DL algorithms such as optimization algorithms, and regularizations.
 
-On top of the existing approaches, my own implementation approaches and DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and ',ipynb' Python Notbook files for more readability and maintainability. 
+On top of the existing approaches, my own implemented DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and Python Notbook files ('.ipynb') for more readability and maintainability. 
 
-This repository will be improved, maintained, and debugged over time. 
-This repository is not meant for the production but prototyping.
-That being said, you can use it to better study and learn the theoretical foundation of deep learning in Neural Networds.
+This repository will be improved, maintained, and debugged over time but is not meant for production but prototyping.
+That being said, you can use it to better study and learn the theoretical foundation of deep learning in Neural Networds in practice.
 
 #### Network Architectures
 
@@ -37,7 +36,7 @@ That being said, you can use it to better study and learn the theoretical founda
 #### Regularization
 
 1. Dropout
-2. Your usual L1 and L2 regularization
+2. The usual L1 and L2 regularization
 
 #### Nonlinearities
 
@@ -45,6 +44,7 @@ That being said, you can use it to better study and learn the theoretical founda
 2. leaky ReLU
 3. sigmoid
 4. tanh
+5. many more.....
 
 #### Hipster techniques
 
@@ -55,6 +55,13 @@ That being said, you can use it to better study and learn the theoretical founda
 
 1. Max pooling
 2. Average pooling
+
+### Datasets
+
+1. Bike sharing dataset
+2. Smartwatch multisensor experimental dataset
+3. Language transalation scripts
+4. Other scripts
 
 ## Run
 
@@ -68,4 +75,4 @@ That being said, you can use it to better study and learn the theoretical founda
 
 ## License
 
-This repository follows the same license as the parent repository 'hipsternet', i.e Unlicense License <http://unlicense.org>.
+This repository follows the same license as the parent repository 'wiseodd-hipsternet', i.e Unlicense License <http://unlicense.org>.
