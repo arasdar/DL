@@ -1,0 +1,8 @@
+name: arasdar-DL-GAN-env
+dependencies:
+- jupyter
+- numpy
+- pillow
+- tqdm
+- matplotlib
+- tensorflow
