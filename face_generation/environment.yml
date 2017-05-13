@@ -5,4 +5,5 @@ dependencies:
 - pillow
 - tqdm
 - matplotlib
-- tensorflow
+- pip:
+     - tensorflow
