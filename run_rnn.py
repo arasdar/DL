@@ -1,7 +1,7 @@
 import sys
 import numpy as np
-import hipsternet.neuralnet as nn
-import hipsternet.solver as solver
+import impl.neuralnet as nn
+import impl.solver as solver
 
 
 time_step = 10

@@ -1,6 +1,6 @@
 import numpy as np
-import hipsternet.utils as util
-import hipsternet.constant as c
+import impl.utils as util
+import impl.constant as c
 import copy
 from sklearn.utils import shuffle as skshuffle
 

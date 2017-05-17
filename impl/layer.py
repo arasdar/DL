@@ -1,8 +1,8 @@
 import numpy as np
-import hipsternet.utils as util
-import hipsternet.constant as c
-import hipsternet.regularization as reg
-from hipsternet.im2col import *
+import impl.utils as util
+import impl.constant as c
+import impl.regularization as reg
+from impl.im2col import *
 
 
 def fc_forward(X, W, b):

@@ -1,8 +1,8 @@
 import numpy as np
-import hipsternet.loss as loss_fun
-import hipsternet.layer as l
-import hipsternet.regularization as reg
-import hipsternet.utils as util
+import impl.loss as loss_fun
+import impl.layer as l
+import impl.regularization as reg
+import impl.utils as util
 
 
 class NeuralNet(object):

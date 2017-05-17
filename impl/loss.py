@@ -1,6 +1,6 @@
 import numpy as np
-import hipsternet.regularization as reg
-import hipsternet.utils as util
+import impl.regularization as reg
+import impl.utils as util
 
 
 def regularization(model, reg_type='l2', lam=1e-3):
