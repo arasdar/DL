@@ -15,15 +15,13 @@ def fwd(X, w, b):
     cache = h1_cache, nl1_cache, h2_cache
     return y, chache
 
-def bwd(dy_txhxwxd_act, cache):
+def bwd(dy, cache):
 
-    #     # output cache
-    #     cache = h1_txhxwxd_logit_cache, h21_txhxwxd_logit_cache, h21_txhxwxd_act_cache, h22_txhxwxd_logit_cache, y_txhxwxd_act_cache
-    h1_txhxwxd_logit_cache, h21_txhxwxd_logit_cache, h21_txhxwxd_act_cache, h22_txhxwxd_logit_cache, y_txhxwxd_act_cache = cache
+    h1_cache, nl1_cache, h2_cache = cache
 
-    #         # output layer - non-linearity
-    #         y_txhxwxd_act, y_txhxwxd_act_cache = l.relu_forward(y_txhxwxd_logit)
-    dy_txhxwxd_logit = l.relu_backward(cache=y_txhxwxd_act_cache, dout=dy_txhxwxd_act)
+    # 2nd layer
+    dh1, dw2, db2 = l.conv_backward(dout=dy, cache=h2_cache)
+    dh1 = l.relu_backward(dout=dh1, cache=nl1_cache)
 
     #         # 2nd layer - adding to spnn output
     #         y_txhxwxd_logit += h22_txhxwxd_logit
@@ -35,7 +33,6 @@ def bwd(dy_txhxwxd_act, cache):
     #                                                     stride=1, # stride one means include all and no jump
     #                                                     W=w22, # kernel size 3x3 for all layers
     #                                                     X=h21_txhxwxd_act) # input image in SPNN for spatial PNN
-    dh21_txhxwxd_act, dw22, db22 = l.conv_backward(dout=dh22_txhxwxd_logit, cache=h22_txhxwxd_logit_cache)
 
     #         # 2nd layer - non-linearity
     #         h21_txhxwxd_act, h21_txhxwxd_act_cache = l.relu_forward(h21_txhxwxd_logit)
