@@ -5,7 +5,7 @@ import impl.regularization as reg
 import impl.utils as util
 import impl.RNN as rnn
 
-class GRU2(rnn.RNN):
+class GRU4(rnn.RNN):
 
     def __init__(self, D, H, char2idx, idx2char):
         super().__init__(D, H, char2idx, idx2char)
@@ -31,7 +31,7 @@ class GRU2(rnn.RNN):
         hh, hh_tanh_cache = l.tanh_forward(hh)
 
         # h_next and y_pred
-        h = h_old + hz * (hh - h_old)
+        h = h_old + hz * hh
         y, y_cache = l.fc_forward(h, Wy, by)
 
         cache = h_old, X, hz, hz_cache, hz_sigm_cache, hh, hh_cache, hh_tanh_cache, h, y_cache
@@ -49,7 +49,7 @@ class GRU2(rnn.RNN):
         # h_next and y_pred
         dh, dWy, dby = l.fc_backward(dy, y_cache)
         dh += dh_next
-        dh_old1 = (1. - hz) * dh
+        dh_old1 = dh
 
         # signal: h_pred
         dhh = hz * dh
@@ -58,7 +58,7 @@ class GRU2(rnn.RNN):
         dh_old2 = dX[:, :self.H]
 
         # gate: h_prob
-        dhz = (hh - h_old) * dh
+        dhz = hh * dh
         dhz = l.sigmoid_backward(dhz, hz_sigm_cache)
         dX, dWz, dbz = l.fc_backward(dhz, hz_cache)
         dh_old3 = dX[:, :self.H]
