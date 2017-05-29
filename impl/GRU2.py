@@ -12,14 +12,14 @@ class GRU2(rnn.RNN):
 
     def forward(self, X, h_old, train=True):
         m = self.model
-        Wz, Wh, Wy = m['Wh'], m['Wh'], m['Wy']
-        bz, bh, by = m['bh'], m['bh'], m['by']
+        Wz, Wh, Wy = m['Wz'], m['Wh'], m['Wy']
+        bz, bh, by = m['bz'], m['bh'], m['by']
 
         X_one_hot = np.zeros(self.D)
         X_one_hot[X] = 1.
         X_one_hot = X_one_hot.reshape(1, -1)
 
-        # concat: [h, x]
+        # concat: [h, x]: D+H=Z
         X = np.column_stack((h_old, X_one_hot))
 
         # gate: h_prob
@@ -66,7 +66,8 @@ class GRU2(rnn.RNN):
         # concat: [h, x]
         dh_next = dh_old1 + dh_old2 + dh_old3
 
-        grad = dict(Wz=dWz, Wh=dWh, Wy=dWy, bz=dbz, bh=dbh, by=dby)
+        grad = dict(Wz=dWz, Wh=dWh, Wy=dWy, 
+                    bz=dbz, bh=dbh, by=dby)
 
         return grad, dh_next
 
