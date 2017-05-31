@@ -12,8 +12,8 @@ class GRU4(rnn.RNN):
 
     def forward(self, X, h_old, train=True):
         m = self.model
-        Wz, Wh, Wy = m['Wh'], m['Wh'], m['Wy']
-        bz, bh, by = m['bh'], m['bh'], m['by']
+        Wz, Wh, Wy = m['Wz'], m['Wh'], m['Wy']
+        bz, bh, by = m['bz'], m['bh'], m['by']
 
         X_one_hot = np.zeros(self.D)
         X_one_hot[X] = 1.
