@@ -7,5 +7,5 @@ dependencies:
 - matplotlib=1.5.3
 - pip:
     - keras==1.1.1
-    - tensorflow
+    - tensorflow==1.0
 - jupyter

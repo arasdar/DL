@@ -4,3 +4,4 @@ floyd login ID & PW
 cd /home/arasdar/arasdar-DL-git/project-folder
 floyd init arasdar-DL-ProjName-project
 floyd run --mode jupyter --gpu --env tensorflow-1.0 --data DATA-ID  # and maybe data folder inside
+floyd output ID(Experiment ID) # to download the existing data in the cloud(floydhub)
