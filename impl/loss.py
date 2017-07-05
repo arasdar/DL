@@ -96,7 +96,6 @@ def l2_regression(model, y_pred, y_train, lam=1e-3):
 
     return data_loss + reg_loss
 
-
 def dl2_regression(y_pred, y_train):
     m = y_pred.shape[0]
 
@@ -104,7 +103,6 @@ def dl2_regression(y_pred, y_train):
     grad_y /= m
 
     return grad_y
-
 
 def l1_regression(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
