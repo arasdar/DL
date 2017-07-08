@@ -20,19 +20,16 @@ def regularization(model, reg_type='l2', lam=1e-3):
 
     return reg_loss
 
-
-def cross_entropy(y_pred, y_train): # no regularization
-#def cross_entropy(model, y_pred, y_train, lam=1e-3):
+def cross_entropy(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
     prob = util.softmax(y_pred)
     log_like = -np.log(prob[range(m), y_train])
 
     data_loss = np.sum(log_like) / m
-#    reg_loss = regularization(model, reg_type='l2', lam=lam)
+    reg_loss = regularization(model, reg_type='l2', lam=lam)
 
-    return data_loss # + reg_loss
-
+    return data_loss + reg_loss
 
 def dcross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
@@ -42,7 +39,6 @@ def dcross_entropy(y_pred, y_train):
     grad_y /= m
 
     return grad_y
-
 
 def hinge_loss(model, y_pred, y_train, lam=1e-3, delta=1):
     m = y_pred.shape[0]
