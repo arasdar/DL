@@ -1,24 +1,29 @@
 # Deep Learning
 
-This repository was initially forked-of from wiseodd-hipsternet.
-The credit goes to him for the most basic implementation of the DL algorithms such as optimization algorithms, and regularizations.
+This repository was initially the forked-of-version from wiseodd-hipsternet.
+The credit goes to him for the most basic fundemental implementation of the DL algorithms such as network architectures, optimization algorithms, and regularizations techniques.
 
 On top of the existing approaches, my own implemented DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and Python Notbook files ('.ipynb') for more readability and maintainability. 
 
-This repository will be improved, maintained, and debugged over time but is not meant for production but prototyping.
-That being said, you can use it to better study and learn the theoretical foundation of deep learning in Neural Networds in practice.
+This repository will be continuously improved, maintained, and debugged over time but is meant for learning and prototyping the DL approachs and NOT meant for production.
 
-This repository is including the implementation based on NumPy (NP) from scratch, thanks to Hipsternet/Wiseodd/Wisetodd, along with tensorflow-based (tf-based) implemented NNs.
+You can use this repository to better study and learn the theoretical foundation of deep learning in Neural Networds in practice such as the data preperation, building neural netowork architectures, backprp-based learning approaches, and how to run the learning session in deep NN architecture. 
 
-#### Network Architectures
+This repository is including mainly the NumPy-based implementation (np-based) of DL stuff from scratch, thanks to Hipsternet/Wiseodd/Wisetodd, along with some tensorflow-based (tf-based) implementation as well.
+
+#### Neural Network Architectures
 
 1. Convolutional NN
 2. Feed Forward NN
 3. Recurrent NN
 4. LSTM NN
-5. GRU NN
+5. GRU NN: There are modified GRUs available as well.
+7. Deep CNN
+8. Deep RNN
+9. Deep LSTM
+10. Deep GRU: Its deep modified versions are also available.
 
-#### Optimization algorithms
+#### Optimization algorithms: Backprop-based learning
 
 1. SGD
 2. Momentum SGD
@@ -26,8 +31,9 @@ This repository is including the implementation based on NumPy (NP) from scratch
 4. Adagrad
 5. RMSprop
 6. Adam
+7. Adam_RNN
 
-#### Loss functions
+#### Loss/Error functions
 
 1. Cross Entropy
 2. Hinge Loss
@@ -39,6 +45,7 @@ This repository is including the implementation based on NumPy (NP) from scratch
 
 1. Dropout
 2. The usual L1 and L2 regularization
+3. Dropout_SELU
 
 #### Nonlinearities
 
@@ -46,11 +53,14 @@ This repository is including the implementation based on NumPy (NP) from scratch
 2. Leaky ReLU
 3. Sigmoid
 4. Tanh
-5. PReLU: Parameteric ReLU
+5. PReLU: Parameteric ReLU or maxout network
 6. Fully learable PReLU
 7. Softplus: Integral-Sigmoid/Softmax
 8. Softmax for multiple-output classification
 9. Integ-Tanh: Integral of Tanh
+10. Fully Learnable PReLU
+11. ELU: Exponentioal Linear Unit
+11. SELU: Scaled ELU
 
 #### Normalization and initialization techniques
 
@@ -71,6 +81,7 @@ This repository is including the implementation based on NumPy (NP) from scratch
 4. RNN for sequence-to-sequence (seq2seq) learning for langugae translation
 5. GAN for face generation on CelebA and mnist dataset
 6. CNN for image classification on CIFAR dataset.
+7. RNN for time-series data or historical data sequence learning
 
 ### Datasets
 

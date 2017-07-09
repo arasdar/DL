@@ -225,34 +225,36 @@ def tanh_backward(dout, cache):
     dX = (1 - cache**2) * dout
     return dX
 
-############### My activation functions
-############### Aras added: REMEMBER the activation function is either LEARNABLE or DIFFERENTIABLE
-def relu_fwd(X):
-    return np.maximum(X, 0)
-def relu_bwd(X, dX):
-    dX[X <= 0] = 0
+def integ_tanh_forward(X):
+    out = np.log(np.cosh(X)) # ln (cosh x) + C.
+    cache = X
+    return out, cache
+
+def integ_tanh_backward(dout, cache):
+    X = cache
+    dX = dout * np.tanh(X)
     return dX
 
-def integ_tanh_fwd(X):
-    return np.log(np.cosh(X)) # ln (cosh x) + C.
-def integ_tanh_bwd(X, dX):
-    return dX * np.tanh(X)
+def tanh_forward(X):
+    out = np.tanh(X)
+    cache = X
+    return out, cache
 
-def tanh_fwd(X):
-    return np.tanh(X)
-def tanh_bwd(X, dX):
-    return dX * (1 - (np.tanh(X)**2)) # dTanh = 1-tanh**2
+def tanh_backward(dout, cache):
+    X = cache
+    dX = dout * (1 - (np.tanh(X)**2)) # dTanh = 1-tanh**2
+    return dX
 
 # Softplus: integral of sigmoid/softmax
-def softplus_fwd(X):
-    return np.log(1+np.exp(X))
-def softplus_bwd(X, dX):
-    return dX * util.sigmoid(X)
+def softplus_forward(X):
+    out = np.log(1+np.exp(X))
+    cache = X
+    return out, cache
 
-def sigmoid_fwd(X):
-    return util.sigmoid(X)
-def sigmoid_bwd(X, dX):
-    return dX * util.sigmoid(X) * (1.0 - util.sigmoid(X))  
+def softplus_backward(dout, cache):
+    X = cache
+    dX = dout * util.sigmoid(X)
+    return dX
 
 ## Noisy ReLU by Hinton et al. (backprop)
 # Wickipedia: Rectified linear units can be extended to include Gaussian noise, making them noisy ReLUs, giving[6].
@@ -270,11 +272,15 @@ def sigmoid_bwd(X, dX):
 # They can be approximated efficiently by noisy, rectified linear units. 
 # Compared with binary units, these units learn features that are better for object recognition on the NORB dataset and face verification on the Labeled Faces in the Wild dataset. 
 # Unlike binary units, rectified linear units preserve information about relative intensities as information travels through multiple layers of feature detectors.
-def noisy_relu_fwd(X):
+def noisy_relu_forward(X):
     noise = np.random.normal(loc=0.0, scale=1.0, size=None)
-    return np.maximum(0, X+noise)
-def noisy_relu_bwd(X, dX):
-    dX[X <= 0] = 0
+    out = np.maximum(0, X+noise)
+    cache = (X, noise)
+    return out, cache
+    
+def noisy_relu_backward(dout, cache):
+    X, noise = cache
+    dX[X < 0] = 0
     return dX
 
 ## Leaky ReLU by Andrew NG et al. (Google brain)
