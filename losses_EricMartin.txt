@@ -1,0 +1,49 @@
+Consider a binary classification problem with target t and output probability p.
+Further, consider the batched version of this problem, with targets t_i and outputs p_i.
+Assume independence between all elements in the batch.
+
+The likelihood is
+prod_i p_i^t_i * (1-p_i)^(1-t_i) = prod_i (p_i if t_i == 1 else (1-p_i))
+
+Rather than maximizing the likelihood, we assume we can maximize a monotonic function of the likelihood, 
+such as the log likelihood. If the problem was convex or we knew optimization would end at a global optima,
+the maximizer for log likelihood would be the same as the maximizer for likelihood.
+
+Log likelihood:
+sum_i [t_i log(p_i) + (1-t_i)log(1-p_i)] = sum_i (log(p_i) if t_i == 1 else log(1-p_i))
+
+To stick with optimization convention, let's switch from max log likelihood to min negative log likelihood:
+sum_i (-log(p_i) if t_1 == 1 else -log(1-p_i))
+
+Now consider the squared error:
+sum_i (p_i - t_i)^2 = sum_i ((1-p_i)^2 if t_i == 1 else p_i^2)
+
+Now consider the relatively goofy summed likelihood (summed across the batch). Before cringing too much, 
+consider this is equal to the likelihood for batch size = 1. You can also think of it as a non-normalized version of
+the average likelihood, which doesn't seem so bad (just replacing a geometric mean with an arithmetic one).
+summed likelihood:
+sum_i p_i^t_i * (1-p_i)^(1-t_i) = sum_i (p_i if t_i == 1 else (1-p_i))
+
+To also make this a minimization, multiply by -1
+NSL:
+sum_i (-p_i if t_i == 1 else -(1-p_i))
+
+Putting these all into a table, we have
+      NSL        NLL          SE
+t=1   -p_i       -log(p_i)    (1-p_i)^2
+t=0   -(1-p_i)   -log(1-p_i)  p_i^2
+
+For the sake of optimization, the NSL losses can be simplified to 1-p (for t=1) and p (for t=0)
+without changing the gradient with respect to p.
+
+See plots for t=0 below.
+
+Why is the log likelihood a better approximation than the squared error. Notably, for the batch size = 1 case, the squared
+error is actually the squared likelihood. This is another monotonic transform of the true objective, the likelihood.
+
+Qualitatively (from looking at the curves), what kind of minimizing distribution of p's do we expect? 
+Likelihood loss is linear, which makes me think of lasso. This penalizes p=.8 instead of p=.6 as much as 
+it penalizes p=.2 instead of p=0.
+Squared loss is quadratic. This makes me think that for t=0, it would push to p=small, but not to 0. p=.8 instead of .6 is
+much worse than p=.2 instead of p=0.
+NLL is linear for small loss, exponential for large loss. Is this a best of both worlds loss function?
