@@ -2,7 +2,7 @@ import numpy as np
 import impl.loss as loss_fun
 import impl.layer as l
 import impl.regularization as reg
-import impl.utils as util
+#import impl.utils as util
 
 
 class NN(object):
@@ -68,7 +68,7 @@ class NN(object):
 
     def predict_proba(self, X):
         score, _ = self.forward(X, False)
-        return util.softmax(score)
+        return l.softmax(score)
 
     def predict(self, X):
         if self.mode == 'classification':

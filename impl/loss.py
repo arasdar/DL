@@ -1,7 +1,7 @@
 import numpy as np
 import impl.regularization as reg
-import impl.utils as util
-
+#import impl.utils as util
+import impl.layer as l
 
 def regularization(model, reg_type='l2', lam=1e-3):
     reg_types = dict(
@@ -23,7 +23,7 @@ def regularization(model, reg_type='l2', lam=1e-3):
 def cross_entropy(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
-    prob = util.softmax(y_pred)
+    prob = l.softmax(y_pred)
     log_like = -np.log(prob[range(m), y_train])
 
     data_loss = np.sum(log_like) / m
@@ -34,7 +34,7 @@ def cross_entropy(model, y_pred, y_train, lam=1e-3):
 def dcross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
-    grad_y = util.softmax(y_pred)
+    grad_y = l.softmax(y_pred)
     grad_y[range(m), y_train] -= 1.
     grad_y /= m
 
@@ -69,7 +69,7 @@ def dhinge_loss(y_pred, y_train, margin=1):
 def squared_loss(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
-    data_loss = 0.5 * np.sum((util.onehot(y_train) - y_pred)**2) / m
+    data_loss = 0.5 * np.sum((l.onehot(y_train) - y_pred)**2) / m
     reg_loss = regularization(model, reg_type='l2', lam=lam)
 
     return data_loss + reg_loss
@@ -78,7 +78,7 @@ def squared_loss(model, y_pred, y_train, lam=1e-3):
 def dsquared_loss(y_pred, y_train):
     m = y_pred.shape[0]
 
-    grad_y = y_pred - util.onehot(y_train)
+    grad_y = y_pred - l.onehot(y_train)
     grad_y /= m
 
     return grad_y

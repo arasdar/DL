@@ -1,6 +1,7 @@
 import numpy as np
-import impl.constant as c
 
+#     import impl.constant as c
+c = eps = 1e-8 # constant
 
 def l2_reg(W, lam=1e-3):
     return .5 * lam * np.sum(W * W)
