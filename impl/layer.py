@@ -63,7 +63,7 @@ def bn_forward(X, gamma, beta, cache, momentum=.9, train=True):
         mu = np.mean(X, axis=0)
         var = np.var(X, axis=0)
 
-        X_norm = (X - mu) / np.sqrt(var + c.eps)
+        X_norm = (X - mu) / np.sqrt(var + eps)
         out = gamma * X_norm + beta
 
         cache = (X, X_norm, mu, var, gamma, beta)
@@ -71,7 +71,7 @@ def bn_forward(X, gamma, beta, cache, momentum=.9, train=True):
         running_mean = exp_running_avg(running_mean, mu, momentum)
         running_var = exp_running_avg(running_var, var, momentum)
     else:
-        X_norm = (X - running_mean) / np.sqrt(running_var + c.eps)
+        X_norm = (X - running_mean) / np.sqrt(running_var + eps)
         out = gamma * X_norm + beta
         cache = None
 
@@ -84,7 +84,7 @@ def bn_backward(dout, cache):
     N, D = X.shape
 
     X_mu = X - mu
-    std_inv = 1. / np.sqrt(var + c.eps)
+    std_inv = 1. / np.sqrt(var + eps)
 
     dX_norm = dout * gamma
     dvar = np.sum(dX_norm * X_mu, axis=0) * -.5 * std_inv**3
@@ -246,6 +246,7 @@ def tanh_forward(X):
     return out, cache
 
 def tanh_backward(dout, cache):
+    # dX = dout * (1 - (np.tanh(X)**2)) # dTanh = 1-tanh**2
     dX = (1 - cache**2) * dout
     return dX
 
@@ -257,16 +258,6 @@ def integ_tanh_forward(X):
 def integ_tanh_backward(dout, cache):
     X = cache
     dX = dout * np.tanh(X)
-    return dX
-
-def tanh_forward(X):
-    out = np.tanh(X)
-    cache = X
-    return out, cache
-
-def tanh_backward(dout, cache):
-    X = cache
-    dX = dout * (1 - (np.tanh(X)**2)) # dTanh = 1-tanh**2
     return dX
 
 # Softplus: integral of sigmoid/softmax
