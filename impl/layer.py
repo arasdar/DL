@@ -5,6 +5,45 @@ from impl.im2col import *
 #     import impl.constant as c
 c = eps = 1e-8 # constant
 
+def selu_forward(self, X):
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    out = scale * np.where(X>=0.0, X, alpha * (np.exp(X)-1))
+    cache = X
+    return out, cache
+
+def selu_backward(self, dout, cache):
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    X = cache
+    dX_pos = dout.copy()
+    dX_pos[X<0] = 0
+    dX_neg = dout.copy()
+    dX_neg[X>0] = 0
+    dX = scale * np.where(X>=0.0, dX_pos, dX_neg * alpha * np.exp(X))
+    return dX
+
+# p_dropout = keep_prob in this case! 
+# Is this true in other cases as well?
+def alpha_dropout_fwd(self, h, q):
+    '''h is activation, q is keep probability: q=1-p, p=p_dropout, and q=keep_prob'''
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    alpha_p = -scale * alpha
+    mask = np.random.binomial(1, q, size=h.shape)
+    dropped = (mask * h) + ((1 - mask) * alpha_p)
+    a = 1. / np.sqrt(q + (alpha_p ** 2 * q  * (1 - q)))
+    b = -a * (1 - q) * alpha_p
+    out = (a * dropped) + b
+    cache = (a, mask)
+    return out, cache
+
+def alpha_dropout_bwd(self, dout, cache):
+    a, mask = cache
+    d_dropped = dout * a
+    dh = d_dropped * mask
+    return dh
+
 #import impl.utils as util: This is added here
 def exp_running_avg(running, new, gamma=.9):
     return gamma * running + (1. - gamma) * new
