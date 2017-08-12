@@ -19,7 +19,7 @@ def l1_reg(W, lam=1e-3):
 def dl1_reg(W, lam=1e-3):
     return lam * W / (np.abs(W) + eps)
 
-# import impl.utils as util: This is added here
+# import impl.utils as util
 def exp_running_avg(running, new, gamma=.9):
     return gamma * running + (1. - gamma) * new
 
@@ -39,6 +39,8 @@ def sigmoid(X):
     return 1. / (1 + np.exp(-X))
 
 # from impl.im2col import *
+# or
+# import impl.im2col as im2col
 def get_im2col_indices(x_shape, field_height, field_width, padding=1, stride=1):
     # First figure out what the size of the output should be
     N, C, H, W = x_shape
