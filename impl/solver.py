@@ -3,7 +3,7 @@ import impl.layer as l
 from sklearn.utils import shuffle as skshuffle
 
 #     import impl.constant as c
-eps = 1e-8 # constant
+# eps = 1e-8 # constant
 
 def get_minibatch(X, y, minibatch_size, shuffle=True):
     minibatches = []
@@ -128,7 +128,7 @@ def adagrad(nn, X_train, y_train, val_set=None, alpha=1e-3, mb_size=256, n_iter=
 
         for k in grad:
             cache[k] += grad[k]**2
-            nn.model[k] -= alpha * grad[k] / (np.sqrt(cache[k]) + eps)
+            nn.model[k] -= alpha * grad[k] / (np.sqrt(cache[k]) + l.eps)
 
     return nn
 
@@ -157,7 +157,7 @@ def rmsprop(nn, X_train, y_train, val_set=None, alpha=1e-3, mb_size=256, n_iter=
 
         for k in grad:
             cache[k] = l.exp_running_avg(cache[k], grad[k]**2, gamma)
-            nn.model[k] -= alpha * grad[k] / (np.sqrt(cache[k]) + eps)
+            nn.model[k] -= alpha * grad[k] / (np.sqrt(cache[k]) + l.eps)
 
     return nn
 
@@ -194,7 +194,7 @@ def adam(nn, X_train, y_train, val_set=None, alpha=0.001, mb_size=256, n_iter=20
             m_k_hat = M[k] / (1. - beta1**(t))
             r_k_hat = R[k] / (1. - beta2**(t))
 
-            nn.model[k] -= alpha * m_k_hat / (np.sqrt(r_k_hat) + eps)
+            nn.model[k] -= alpha * m_k_hat / (np.sqrt(r_k_hat) + l.eps)
 
     return nn
 
@@ -243,6 +243,6 @@ def adam_rnn(nn, X_train, y_train, alpha=0.001, mb_size=256, n_iter=2000, print_
             m_k_hat = M[k] / (1. - beta1**(t))
             r_k_hat = R[k] / (1. - beta2**(t))
 
-            nn.model[k] -= alpha * m_k_hat / (np.sqrt(r_k_hat) + eps)
+            nn.model[k] -= alpha * m_k_hat / (np.sqrt(r_k_hat) + l.eps)
 
     return nn

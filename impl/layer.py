@@ -76,8 +76,7 @@ def im2col_indices(x, field_height, field_width, padding=1, stride=1):
     return cols
 
 
-def col2im_indices(cols, x_shape, field_height=3, field_width=3, padding=1,
-                   stride=1):
+def col2im_indices(cols, x_shape, field_height=3, field_width=3, padding=1, stride=1):
     """ An implementation of col2im based on fancy indexing and np.add.at """
     N, C, H, W = x_shape
     H_padded, W_padded = H + 2 * padding, W + 2 * padding
@@ -135,14 +134,14 @@ def prepro(X_train, X_val, X_test):
     mean = np.mean(X_train)
     return X_train - mean, X_val - mean, X_test - mean
 
-def selu_forward(self, X):
+def selu_forward(X):
     alpha = 1.6732632423543772848170429916717
     scale = 1.0507009873554804934193349852946
     out = scale * np.where(X>=0.0, X, alpha * (np.exp(X)-1))
     cache = X
     return out, cache
 
-def selu_backward(self, dout, cache):
+def selu_backward(dout, cache):
     alpha = 1.6732632423543772848170429916717
     scale = 1.0507009873554804934193349852946
     X = cache
@@ -155,7 +154,7 @@ def selu_backward(self, dout, cache):
 
 # p_dropout = keep_prob in this case! 
 # Is this true in other cases as well?
-def alpha_dropout_fwd(self, h, q):
+def alpha_dropout_fwd(h, q):
     '''h is activation, q is keep probability: q=1-p, p=p_dropout, and q=keep_prob'''
     alpha = 1.6732632423543772848170429916717
     scale = 1.0507009873554804934193349852946
@@ -168,7 +167,7 @@ def alpha_dropout_fwd(self, h, q):
     cache = (a, mask)
     return out, cache
 
-def alpha_dropout_bwd(self, dout, cache):
+def alpha_dropout_bwd(dout, cache):
     a, mask = cache
     d_dropped = dout * a
     dh = d_dropped * mask
