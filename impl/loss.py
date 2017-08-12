@@ -31,7 +31,7 @@ def dcross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
     grad_y = l.softmax(y_pred)
-    grad_y[range(m), y_train] -= 1.0
+    grad_y[range(m), y_train] -= 1.
     grad_y /= m
 
     return grad_y
