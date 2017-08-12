@@ -18,7 +18,7 @@ def regularization(model, reg_type='l2', lam=1e-3):
 
     return reg_loss
 
-def cross_entropy(self, y_pred, y_train):
+def cross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
     prob = l.softmax(y_pred)
@@ -27,7 +27,7 @@ def cross_entropy(self, y_pred, y_train):
 
     return data_loss
 
-def dcross_entropy(self, y_pred, y_train):
+def dcross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
     grad_y = l.softmax(y_pred)
