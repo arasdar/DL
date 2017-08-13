@@ -61,7 +61,6 @@ def get_im2col_indices(x_shape, field_height, field_width, padding=1, stride=1):
 
     return (k.astype(int), i.astype(int), j.astype(int))
 
-
 def im2col_indices(x, field_height, field_width, padding=1, stride=1):
     """ An implementation of im2col based on some fancy indexing """
     # Zero-pad the input
@@ -74,7 +73,6 @@ def im2col_indices(x, field_height, field_width, padding=1, stride=1):
     C = x.shape[1]
     cols = cols.transpose(1, 2, 0).reshape(field_height * field_width * C, -1)
     return cols
-
 
 def col2im_indices(cols, x_shape, field_height=3, field_width=3, padding=1, stride=1):
     """ An implementation of col2im based on fancy indexing and np.add.at """
@@ -410,6 +408,7 @@ def leaky_relu_fwd(X):
     m=1e-3 # 1e-3==0.001
     X[X < 0] *= m
     return X
+
 def leaky_relu_bwd(X, dX):
     m=1e-3
     dX[X < 0] *= m
@@ -444,6 +443,7 @@ def elu_fwd(X):
     X_neg = np.minimum(X, 0) # otherwise: if X<=0, Exp Leaky ReLU
     X_neg_exp = m * (np.exp(X_neg)-1) # a: slope, a>=0
     return X_pos + X_neg_exp
+
 def elu_bwd(X, dX):
     m = 1.0 # 1e-3==0.001, a==m, 0.0 <= a <= 1.0, active/passive, on/off
     X_neg = np.minimum(X, 0) # otherwise: if X<=0, Exp Leaky ReLU
