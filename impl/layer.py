@@ -31,6 +31,63 @@ def onehot(labels):
     y[range(labels.size), labels] = 1.
     return y
 
+# Softplus: integral of sigmoid/softmax
+def softplus_forward(X):
+    out = np.log(1+np.exp(X))
+    cache = X
+    return out, cache
+
+def softplus_backward(dout, cache):
+    X = cache
+    dX = dout * sigmoid(X)
+    return dX
+
+# Centered
+# Softplus: integral of sigmoid/softmax
+# An approximation of ReLU
+# An approximation of ELU
+# A uniform SELU
+# Softplus: integral of sigmoid/softmax
+def centered_softplus_forward(X):
+    #     out = np.log(1+np.exp(X)) - np.log(1+np.exp(0.0)) 
+    #     out = np.log(1+np.exp(X)) - np.log(1+1) 
+    #     out = np.log(1+np.exp(X)) - np.log(2) 
+    out = np.log((1+np.exp(X))/2.0) 
+    cache = X
+    return out, cache
+
+def centered_softplus_backward(dout, cache):
+    X = cache
+    dX = dout * sigmoid(X)
+    return dX
+
+#@article{binkowski2017autoregressive,
+#  title={Autoregressive Convolutional Neural Networks for Asynchronous Time Series},
+#  author={Binkowski, Mikolaj and Marti, Gautier and Donnat, Philippe},
+#  journal={arXiv preprint arXiv:1703.04122},
+#  year={2017}
+#}
+def normalized_softplus_forward(X):
+    eX = np.exp((X.T - np.max(X, axis=1)).T)
+    out = np.log((1 + eX)/2.0) # like SELU/ELU
+    return (out.T / out.sum(axis=1)).T
+
+# Example[edit]
+# If we take an input of [1, 2, 3, 4, 1, 2, 3], the softmax of that is [0.024, 0.064, 0.175, 0.475, 0.024, 0.064, 0.175]. The output has most of its weight where the '4' was in the original input. This is what the function is normally used for: to highlight the largest values and suppress values which are significantly below the maximum value.
+
+# Computation of this example using simple Python code:
+
+# >>> import math
+# >>> z = [1.0, 2.0, 3.0, 4.0, 1.0, 2.0, 3.0]
+# >>> z_exp = [math.exp(i) for i in z]
+# >>> print([round(i, 2) for i in z_exp])
+# [2.72, 7.39, 20.09, 54.6, 2.72, 7.39, 20.09]
+# >>> sum_z_exp = sum(z_exp)
+# >>> print(round(sum_z_exp, 2))
+# 114.98
+# >>> softmax = [round(i / sum_z_exp, 3) for i in z_exp]
+# >>> print(softmax)
+# [0.024, 0.064, 0.175, 0.475, 0.024, 0.064, 0.175]
 def softmax(X):
     eX = np.exp((X.T - np.max(X, axis=1)).T)
     return (eX.T / eX.sum(axis=1)).T
@@ -347,17 +404,6 @@ def integ_tanh_forward(X):
 def integ_tanh_backward(dout, cache):
     X = cache
     dX = dout * np.tanh(X)
-    return dX
-
-# Softplus: integral of sigmoid/softmax
-def softplus_forward(X):
-    out = np.log(1+np.exp(X))
-    cache = X
-    return out, cache
-
-def softplus_backward(dout, cache):
-    X = cache
-    dX = dout * sigmoid(X)
     return dX
 
 ## Noisy ReLU by Hinton et al. (backprop)
