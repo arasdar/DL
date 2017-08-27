@@ -100,7 +100,7 @@ def dsquared_loss(y_pred, y_train):
     return grad_y
 
 
-def l2_regression(model, y_pred, y_train, lam=1e-3):
+def l2_regression_reg(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
     data_loss = 0.5 * np.sum((y_train - y_pred)**2) / m
@@ -108,13 +108,29 @@ def l2_regression(model, y_pred, y_train, lam=1e-3):
 
     return data_loss + reg_loss
 
-def dl2_regression(y_pred, y_train):
+def dl2_regression_reg(y_pred, y_train):
     m = y_pred.shape[0]
 
     grad_y = y_pred - y_train.reshape(-1, 1)
     grad_y /= m
 
     return grad_y
+
+def l2_regression(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    # (F(x)-y)^2: convex as X^2 or (aX-b)^2
+    data_loss = 0.5 * np.sum((y_pred - y_train)**2) / m # number of dimensions
+
+    return data_loss
+
+def dl2_regression(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    # (F(x)-y)^2: convex as X^2 or (aX-b)^2
+    dy = (y_pred - y_train)/ m # number of dimensions
+
+    return dy
 
 def l1_regression(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
