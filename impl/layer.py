@@ -243,7 +243,7 @@ def fc_backward(dout, cache):
     return dX, dW, db
 
 def dropout_forward(X, p_dropout):
-    u = np.random.binomial(1, p_dropout, size=X.shape) / p_dropout
+    u = np.random.binomial(1, p_dropout, size=X.shape) # / p_dropout
     out = X * u
     cache = u
     return out, cache
