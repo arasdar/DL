@@ -98,3 +98,49 @@ def dsquared_loss(y_pred, y_train):
     grad_y /= m
 
     return grad_y
+
+def l2_regression_reg(model, y_pred, y_train, lam=1e-3):
+    m = y_pred.shape[0]
+
+    data_loss = 0.5 * np.sum((y_pred.reshape(-1, 1) - y_train.reshape(-1, 1))**2) / m
+    reg_loss = regularization(model, reg_type='l2', lam=lam)
+
+    return data_loss + reg_loss
+
+def dl2_regression_reg(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    grad_y = (y_pred.reshape(-1, 1) - y_train.reshape(-1, 1)) / m
+
+    return grad_y
+
+def l2_regression(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    # (F(x)-y)^2: convex as X^2 or (aX-b)^2
+    data_loss = 0.5 * np.sum((y_pred.reshape(-1, 1) - y_train.reshape(-1, 1))**2) / m # number of dimensions
+
+    return data_loss
+
+def dl2_regression(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    # (F(x)-y)^2: convex as X^2 or (aX-b)^2
+    grad_y = (y_pred.reshape(-1, 1) - y_train.reshape(-1, 1)) / m # number of dimensions
+
+    return grad_y
+
+def l1_regression(model, y_pred, y_train, lam=1e-3):
+    m = y_pred.shape[0]
+
+    data_loss = np.sum(np.abs(y_pred.reshape(-1, 1) - y_train.reshape(-1, 1))) / m
+    reg_loss = regularization(model, reg_type='l2', lam=lam)
+
+    return data_loss + reg_loss
+
+def dl1_regression(y_pred, y_train):
+    m = y_pred.shape[0]
+
+    grad_y = np.sign(y_pred.reshape(-1, 1) - y_train.reshape(-1, 1)) / m
+
+    return grad_y
