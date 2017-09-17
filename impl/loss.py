@@ -1,10 +1,23 @@
 import numpy as np
 import impl.layer as l
 
+# import impl.regularization as reg
+def l2_reg(W, lam=1e-3):
+    return .5 * lam * np.sum(W * W)
+
+def dl2_reg(W, lam=1e-3):
+    return lam * W
+
+def l1_reg(W, lam=1e-3):
+    return lam * np.sum(np.abs(W))
+
+def dl1_reg(W, lam=1e-3):
+    return lam * W / (np.abs(W) + eps)
+
 def regularization(model, reg_type='l2', lam=1e-3):
     reg_types = dict(
-        l1=l.l1_reg,
-        l2=l.l2_reg
+        l1=l1_reg,
+        l2=l2_reg
     )
 
     if reg_type not in reg_types.keys():
@@ -27,15 +40,6 @@ def cross_entropy(y_pred, y_train):
 
     return data_loss
 
-def dcross_entropy(y_pred, y_train):
-    m = y_pred.shape[0]
-
-    grad_y = l.softmax(y_pred)
-    grad_y[range(m), y_train] -= 1.
-    grad_y /= m
-
-    return grad_y
-
 def cross_entropy_reg(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
@@ -47,7 +51,7 @@ def cross_entropy_reg(model, y_pred, y_train, lam=1e-3):
 
     return data_loss + reg_loss
 
-def dcross_entropy_reg(y_pred, y_train):
+def dcross_entropy(y_pred, y_train): # this is equal for both since the reg_loss (noise) derivative is ZERO.
     m = y_pred.shape[0]
 
     grad_y = l.softmax(y_pred)
@@ -106,13 +110,6 @@ def l2_regression_reg(model, y_pred, y_train, lam=1e-3):
     reg_loss = regularization(model, reg_type='l2', lam=lam)
 
     return data_loss + reg_loss
-
-def dl2_regression_reg(y_pred, y_train):
-    m = y_pred.shape[0]
-
-    grad_y = (y_pred.reshape(-1, 1) - y_train.reshape(-1, 1)) / m
-
-    return grad_y
 
 def l2_regression(y_pred, y_train):
     m = y_pred.shape[0]
