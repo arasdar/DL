@@ -226,8 +226,46 @@ def fc_backward(dout, cache):
 
     return dX, dW, db
 
+#Random values in a given shape.
+#Create an array of the given shape and populate it with random samples from a uniform distribution over [0, 1).
+def dropout_forward_inv(X, p_dropout):
+    #if drop_prob_encoder > 0: # if we want dropout on the encoder
+    # inverted version of dropout here. Suppose the drop_prob is 0.5, then during training
+    # we are going to drop half of the units. In this inverted version we also boost the activations
+    # of the remaining 50% by 2.0 (scale). The nice property of this is that during prediction time
+    # we don't have to do any scailing, since all 100% of units will be active, but at their base
+    # firing rate, giving 100% of the "energy". So the neurons later in the pipeline dont't change
+    # their expected firing rate magnitudes
+    # if not predict_mode: # and we are in training mode
+    # p_dropout = 1.0 - drop_prob_encoder
+    # p_dropout is meant to be the probability of keeping the neurons or keep_prob
+    # drop_prob_encoder is the actual probability of droping out the units/ neurons
+    drop_prob_encoder = 1.0 - p_dropout
+    scale = 1.0 / (1.0 - drop_prob_encoder)
+    U = (np.random.rand(*(X.shape)) < (1.0 - drop_prob_encoder)) * scale # generate scaled mask
+    out = X * U # drop!
+    cache = U
+    return out, cache
+
+# Examples
+# Draw samples from the distribution:
+# >>> n, p = 10, .5  # number of trials, probability of each trial
+# >>> s = np.random.binomial(n, p, 1000)
+# # result of flipping a coin 10 times, tested 1000 times.
+# A real world example. A company drills 9 wild-cat oil exploration wells, each with an estimated probability of success of 0.1. All nine wells fail. What is the probability of that happening?
+# Let’s do 20,000 trials of the model, and count the number that generate zero positive results.
+# >>> sum(np.random.binomial(9, 0.1, 20000) == 0)/20000.
+# # answer = 0.38885, or 38%.
+def dropout_forward_inv2(X, p_dropout): # p_dropout == keep_prob
+    # u = np.random.binomial(1, p_dropout, size=X.shape)/ p_dropout
+    scale = 1.0 / p_dropout
+    u = (np.random.binomial(1, p_dropout, size=X.shape) < p_dropout) * scale
+    out = X * u
+    cache = u
+    return out, cache
+
 def dropout_forward(X, p_dropout):
-    u = np.random.binomial(1, p_dropout, size=X.shape) # / p_dropout
+    u = np.random.binomial(1, p_dropout, size=X.shape)
     out = X * u
     cache = u
     return out, cache
