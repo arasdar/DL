@@ -40,6 +40,7 @@ def cross_entropy(y_pred, y_train):
 
     return data_loss
 
+# The model here is refering to the last layer model before softmax function applied.
 def cross_entropy_reg(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 

@@ -7,9 +7,6 @@ eps = 1e-8 # constant
 def exp_running_avg(running, new, gamma=.9):
     return gamma * running + (1. - gamma) * new
 
-def accuracy(y_true, y_pred):
-    return np.mean(y_pred == y_true)
-
 def onehot(labels):
     y = np.zeros([labels.size, np.max(labels) + 1])
     y[range(labels.size), labels] = 1.
@@ -123,7 +120,7 @@ def dropout_forward_inv(X, p_dropout):
 # Let’s do 20,000 trials of the model, and count the number that generate zero positive results.
 # >>> sum(np.random.binomial(9, 0.1, 20000) == 0)/20000.
 # # answer = 0.38885, or 38%.
-def dropout_forward_inv2(X, p_dropout): # p_dropout == keep_prob
+def dropout_forward(X, p_dropout): # p_dropout == keep_prob
     # u = np.random.binomial(1, p_dropout, size=X.shape)/ p_dropout
     scale = 1.0 / p_dropout
     u = (np.random.binomial(1, p_dropout, size=X.shape) < p_dropout) * scale
@@ -131,8 +128,9 @@ def dropout_forward_inv2(X, p_dropout): # p_dropout == keep_prob
     cache = u
     return out, cache
 
-def dropout_forward(X, p_dropout):
-    u = np.random.binomial(1, p_dropout, size=X.shape)
+# Proposed by wiseodd and explained on the github blog
+def dropout_forward_original(X, p_dropout): 
+    u = np.random.binomial(1, p_dropout, size=X.shape)/ p_dropout
     out = X * u
     cache = u
     return out, cache
