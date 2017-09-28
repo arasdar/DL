@@ -1,0 +1,4 @@
+# For numba and cuda-python programming:
+sudo apt-get install nvidia-modprobe
+This does magic in recognizing the GPU-device in the system!
+I don't know how.

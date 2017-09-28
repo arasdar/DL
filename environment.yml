@@ -10,3 +10,6 @@ dependencies:
     - tensorflow==1.0
 - jupyter
 - pandas
+- numba
+- cudatoolkit
+- pyculib
