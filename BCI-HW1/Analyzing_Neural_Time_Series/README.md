@@ -1,3 +1,4 @@
+# The credit goes to Lyndon Duong: https://github.com/lyndond
 # Analyzing_Neural_Time_Series
 
 Analyzing Neural Time Series by Mike Cohen (2014) is a great book written for neuroscientists working with continuous neural data. 
