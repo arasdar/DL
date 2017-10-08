@@ -74,7 +74,7 @@ def softmax(X):
     return (eX.T / eX.sum(axis=1)).T
 
 def sigmoid(X):
-    return 1. / (1 + np.exp(-X))
+    return 1 / (1 + np.exp(-X))
 
 def fc_forward(X, W, b):
     out = X @ W + b
