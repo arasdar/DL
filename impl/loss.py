@@ -35,7 +35,7 @@ def cross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
     prob = l.softmax(y_pred)
-    log_like = -np.log(prob[range(m), y_train])
+    log_like = -np.log(prob[range(m), y_train] + l.eps) # to avoid the devision by zero
     data_loss = np.sum(log_like) / m
 
     return data_loss
@@ -45,7 +45,7 @@ def cross_entropy_reg(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
     prob = l.softmax(y_pred)
-    log_like = -np.log(prob[range(m), y_train])
+    log_like = -np.log(prob[range(m), y_train] + l.eps) # to avoid the division/dividing by zero
 
     data_loss = np.sum(log_like) / m
     reg_loss = regularization(model, reg_type='l2', lam=lam)
