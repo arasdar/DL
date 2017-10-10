@@ -23,6 +23,24 @@ def softplus_backward(dout, cache):
     dX = dout * sigmoid(X)
     return dX
 
+def selu_forward(X):
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    out = scale * np.where(X>=0.0, X, alpha * (np.exp(X)-1))
+    cache = X
+    return out, cache
+
+def selu_backward(dout, cache):
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    X = cache
+    dX_pos = dout.copy()
+    dX_pos[X<0] = 0
+    dX_neg = dout.copy()
+    dX_neg[X>0] = 0
+    dX = scale * np.where(X>=0.0, dX_pos, dX_neg * alpha * np.exp(X))
+    return dX
+
 # Centered
 # Softplus: integral of sigmoid/softmax
 # An approximation of ReLU
