@@ -41,6 +41,26 @@ def selu_backward(dout, cache):
     dX = scale * np.where(X>=0.0, dX_pos, dX_neg * alpha * np.exp(X))
     return dX
 
+# p_dropout = keep_prob
+def selu_dropout_forward(h, q):
+    '''h is activation, q is keep probability: q=1-p, p=p_dropout, and q=keep_prob'''
+    alpha = 1.6732632423543772848170429916717
+    scale = 1.0507009873554804934193349852946
+    alpha_p = -scale * alpha
+    mask = np.random.binomial(1, q, size=h.shape)
+    dropped = (mask * h) + ((1 - mask) * alpha_p)
+    a = 1. / np.sqrt(q + (alpha_p ** 2 * q  * (1 - q)))
+    b = -a * (1 - q) * alpha_p
+    out = (a * dropped) + b
+    cache = (a, mask)
+    return out, cache
+
+def selu_dropout_backward(dout, cache):
+    a, mask = cache
+    d_dropped = dout * a
+    dh = d_dropped * mask
+    return dh
+
 # Centered
 # Softplus: integral of sigmoid/softmax
 # An approximation of ReLU
