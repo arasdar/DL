@@ -2,3 +2,9 @@
 sudo apt-get install nvidia-modprobe
 This does magic in recognizing the GPU-device in the system!
 I don't know how.
+
+# Show the remote origin url
+git remote --verbose or -v
+git remote show origin
+
+
