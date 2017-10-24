@@ -31,26 +31,6 @@ def regularization(model, reg_type='l2', lam=1e-3):
 
     return reg_loss
 
-def onehot(y_train):
-    y = np.zeros([y_train.size, np.max(y_train) + 1])
-    #         y = np.zeros([y_train.size, self.C])
-    y[range(y_train.size), y_train] = 1.
-    return y
-
-def squared_loss(y_prob, y_train):
-    m = y_prob.shape[0]
-
-    data_loss = 0.5 * np.sum(y_prob - (self.onehot(y_train))**2)/ m
-
-    return data_loss
-
-def dsquared_loss(y_prob, y_train):
-    m = y_prob.shape[0]
-
-    grad_y = (y_prob - l.onehot(y_train))/ m
-
-    return grad_y
-
 def cross_entropy(y_pred, y_train):
     m = y_pred.shape[0]
 
@@ -106,8 +86,7 @@ def dhinge_loss(y_pred, y_train, margin=1):
 
     return grad_y
 
-
-def squared_loss(model, y_pred, y_train, lam=1e-3):
+def squared_loss_reg(model, y_pred, y_train, lam=1e-3):
     m = y_pred.shape[0]
 
     data_loss = 0.5 * np.sum((l.onehot(y_train) - y_pred)**2) / m
@@ -116,7 +95,7 @@ def squared_loss(model, y_pred, y_train, lam=1e-3):
     return data_loss + reg_loss
 
 
-def dsquared_loss(y_pred, y_train):
+def dsquared_loss_reg(y_pred, y_train):
     m = y_pred.shape[0]
 
     grad_y = y_pred - l.onehot(y_train)

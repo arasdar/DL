@@ -7,11 +7,6 @@ eps = 1e-8 # constant
 def exp_running_avg(running, new, gamma=.9):
     return gamma * running + (1. - gamma) * new
 
-def onehot(labels):
-    y = np.zeros([labels.size, np.max(labels) + 1])
-    y[range(labels.size), labels] = 1.
-    return y
-
 # Softplus: integral of sigmoid/softmax
 def softplus_forward(X):
     out = np.log(1+np.exp(X))
