@@ -106,6 +106,29 @@ def softmax(X):
     eX = np.exp((X.T - np.max(X, axis=1)).T)
     return (eX.T / eX.sum(axis=1)).T
 
+# def stablesoftmax(x):
+#     """Compute the softmax of vector x in a numerically stable way."""
+#     shiftx = x - np.max(x)
+#     exps = np.exp(shiftx)
+#     return exps / np.sum(exps)
+
+# In [150]: stablesoftmax([1000, 2000, 3000])
+# Out[150]: array([ 0.,  0.,  1.])
+    
+# def softmax(x):
+#     """Compute the softmax of vector x."""
+#     exps = np.exp(x)
+#     return exps / np.sum(exps)
+
+# Let's try it with the sample 3-element vector we've used as an example earlier:
+
+# In [146]: softmax([1, 2, 3])
+# Out[146]: array([ 0.09003057,  0.24472847,  0.66524096])
+# However, if we run this function with larger numbers (or large negative numbers) we have a problem:
+
+# In [148]: softmax([1000, 2000, 3000])
+# Out[148]: array([ nan,  nan,  nan])
+
 def sigmoid(X):
     return 1 / (1 + np.exp(-X))
 
