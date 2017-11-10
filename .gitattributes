@@ -1,1 +1,3 @@
 data/bci/x.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/hw1/ filter=lfs diff=lfs merge=lfs -text
+data/bci/hw3/ filter=lfs diff=lfs merge=lfs -text
