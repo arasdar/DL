@@ -7,4 +7,7 @@ I don't know how.
 git remote --verbose or -v
 git remote show origin
 
+# Installing Xcodes for github use or CLI use
+# Installing homwbrew as MacOS package manager instead of apt-get
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
