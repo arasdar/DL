@@ -1,0 +1,8 @@
+name: arasdar-uri-dl-hw2-env
+dependencies:
+- python
+- jupyter notebook
+- matplotlib
+- scipy
+- pillow
+- future
