@@ -2,3 +2,4 @@ data/bci/x.mat filter=lfs diff=lfs merge=lfs -text
 data/bci/hw1/ filter=lfs diff=lfs merge=lfs -text
 data/bci/hw3/ filter=lfs diff=lfs merge=lfs -text
 papers/ filter=lfs diff=lfs merge=lfs -text
+nobel-laureates-neuroscience/ filter=lfs diff=lfs merge=lfs -text
