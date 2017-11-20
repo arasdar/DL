@@ -65,6 +65,12 @@ def sgd_momentum(w, dw, config=None):
     # TODO: Implement the momentum update formula. Store the updated value in #
     # the next_w variable. You should also use and update the velocity v.     #
     ###########################################################################
+    m = config['momentum']
+    lr = config['learning_rate']
+    v = (m * v) + (lr * dw)
+    w -= v
+    next_w = w
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -72,8 +78,6 @@ def sgd_momentum(w, dw, config=None):
     config['velocity'] = v
 
     return next_w, config
-
-
 
 def rmsprop(x, dx, config=None):
     """
@@ -99,6 +103,25 @@ def rmsprop(x, dx, config=None):
     # in the next_x variable. Don't forget to update cache value stored in    #
     # config['cache'].                                                        #
     ###########################################################################
+    #     #         running_mean = momentum * running_mean + (1 - momentum) * sample_mean
+    #     #         running_var = momentum * running_var + (1 - momentum) * sample_var
+    #     #         running_ = momentum * running_ + (1 - momentum) * sample_
+    #     def exp_running_avg(running_, sample_, momentum):
+    #         return (momentum * running_) + (1. - momentum) * sample_
+    def exp_running_avg(running, new, gamma):
+        return gamma * running + (1. - gamma) * new
+
+    #     cache[k] = exp_running_avg(cache[k], grad[k]**2, gamma)
+    #     nn.model[k] -= alpha * grad[k] / (np.sqrt(cache[k]) + l.eps)
+    gamma = config['decay_rate']
+    alpha = config['learning_rate']
+    eps = config['epsilon']
+    cache = config['cache']
+    cache = exp_running_avg(cache, (dx**2), gamma)
+    x -= alpha * dx / (np.sqrt(cache) + eps)
+    
+    next_x = x
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
@@ -136,6 +159,35 @@ def adam(x, dx, config=None):
     # the next_x variable. Don't forget to update the m, v, and t variables   #
     # stored in config.                                                       #
     ###########################################################################
+    #     M[k] = l.exp_running_avg(M[k], grad[k], beta1)
+    #     R[k] = l.exp_running_avg(R[k], grad[k]**2, beta2)
+    #     m_k_hat = M[k] / (1. - beta1**(t))
+    #     r_k_hat = R[k] / (1. - beta2**(t))
+    #     nn.model[k] -= alpha * m_k_hat / (np.sqrt(r_k_hat) + l.eps)
+    alpha = config['learning_rate']
+    beta1 = config['beta1']
+    beta2 = config['beta2']
+    eps = config['epsilon']
+    M = config['m']
+    R = config['v']
+    t = config['t']
+    
+    #     #         running_mean = momentum * running_mean + (1 - momentum) * sample_mean
+    #     #         running_var = momentum * running_var + (1 - momentum) * sample_var
+    #     #         running_ = momentum * running_ + (1 - momentum) * sample_
+    #     def exp_running_avg(running_, sample_, momentum):
+    #         return (momentum * running_) + (1. - momentum) * sample_
+    def exp_running_avg(running, new, gamma):
+        return gamma * running + (1. - gamma) * new
+
+    M = exp_running_avg(M, dx, beta1)
+    R = exp_running_avg(R, dx**2, beta2)
+    m_k_hat = M / (1. - (beta1**t))
+    r_k_hat = R / (1. - (beta2**t))
+    x -= alpha * m_k_hat / (np.sqrt(r_k_hat) + eps)
+    
+    next_x = x
+
     pass
     ###########################################################################
     #                             END OF YOUR CODE                            #
