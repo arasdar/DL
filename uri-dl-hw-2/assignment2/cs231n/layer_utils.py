@@ -104,3 +104,31 @@ def conv_relu_pool_backward(dout, cache):
     da = relu_backward(ds, relu_cache)
     dx, dw, db = conv_backward_fast(da, conv_cache)
     return dx, dw, db
+
+def l2_reg(W, lam=1e-3):
+    return .5 * lam * np.sum(W * W)
+
+def dl2_reg(W, lam=1e-3):
+    return lam * W
+
+def l1_reg(W, lam=1e-3):
+    return lam * np.sum(np.abs(W))
+
+def dl1_reg(W, lam=1e-3):
+    return lam * W / (np.abs(W) + eps)
+
+def regularization(model, reg_type='l2', lam=1e-3):
+    reg_types = dict(
+        l1=l1_reg,
+        l2=l2_reg
+    )
+
+    if reg_type not in reg_types.keys():
+        raise Exception('Regularization type must be either "l1" or "l2"!')
+
+    reg_loss = np.sum([
+        reg_types[reg_type](model[k], lam)
+        for k in model.keys()
+        if k.startswith('W')])
+
+    return reg_loss
