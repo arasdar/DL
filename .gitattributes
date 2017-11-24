@@ -4,3 +4,5 @@ data/bci/hw3/ filter=lfs diff=lfs merge=lfs -text
 papers/ filter=lfs diff=lfs merge=lfs -text
 nobel-laureates-neuroscience/ filter=lfs diff=lfs merge=lfs -text
 SIPR_20171101_Nov_2017.pdf filter=lfs diff=lfs merge=lfs -text
+neo-cognitron/ filter=lfs diff=lfs merge=lfs -text
+data/bci/hw4/ filter=lfs diff=lfs merge=lfs -text
