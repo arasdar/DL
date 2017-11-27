@@ -6,6 +6,14 @@ from cs231n.layers import *
 from cs231n.layer_utils import *
 
 
+from builtins import range
+from builtins import object
+import numpy as np
+
+from cs231n.layers import *
+from cs231n.layer_utils import *
+
+
 class TwoLayerNet(object):
     """
     A two-layer fully-connected neural network with ReLU nonlinearity and
@@ -47,6 +55,23 @@ class TwoLayerNet(object):
         # weights and biases using the keys 'W1' and 'b1' and second layer weights #
         # and biases using the keys 'W2' and 'b2'.                                 #
         ############################################################################
+        
+        # Based on SciPy documentation:
+        #         For random samples from N(\mu, \sigma^2), use:
+        #         sigma * np.random.randn(...) + mu
+        #         mu = 0.
+        #         sigma = weight_scale
+        
+        # We assume an input dimension of D, a hidden dimension of H, and perform classification over C classes.
+        D, H, C = input_dim, hidden_dim, num_classes
+        
+        self.params = dict(
+            W1=np.random.randn(D, H) * weight_scale,
+            W2=np.random.randn(H, C) * weight_scale,
+            b1=np.zeros((1, H)),
+            b2=np.zeros((1, C))
+        )
+
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
@@ -77,6 +102,15 @@ class TwoLayerNet(object):
         # TODO: Implement the forward pass for the two-layer net, computing the    #
         # class scores for X and storing them in the scores variable.              #
         ############################################################################
+        
+        #     The architecure should be affine - relu - affine - softmax.
+        y_logit, fc_cache1 = affine_forward(b=self.params['b1'], w=self.params['W1'], x=X)
+        y_act, nl_cache1 = relu_forward(x=y_logit)
+        X = y_act.copy() # pass to the next layer
+        
+        # Softmax in included in the loss function: cross entropy
+        scores, fc_cache2 = affine_forward(b=self.params['b2'], w=self.params['W2'], x=X)
+        
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
@@ -96,14 +130,29 @@ class TwoLayerNet(object):
         # NOTE: To ensure that your implementation matches ours and you pass the   #
         # automated tests, make sure that your L2 regularization includes a factor #
         # of 0.5 to simplify the expression for the gradient.                      #
-        ############################################################################
+        ############################################################################        
+        reg_loss = regularization(lam=self.reg, model=self.params, reg_type='l2')
+        
+        loss, dy = softmax_loss(x=scores, y=y)
+        loss += reg_loss
+        
+        # Output layer backward pass
+        dX, dW2, db2 = affine_backward(cache=fc_cache2, dout=dy)
+        dy = dX.copy() # pass to the previous layer
+        
+        # hidden layer
+        dy = relu_backward(cache=nl_cache1, dout=dy)
+        dX, dW1, db1 = affine_backward(cache=fc_cache1, dout=dy)
+        
+        # gradients
+        grads = dict(W1 = dW1, b1 = db1, W2 = dW2, b2 = db2)
+
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
         ############################################################################
 
         return loss, grads
-
 
 class FullyConnectedNet(object):
     """
@@ -163,6 +212,35 @@ class FullyConnectedNet(object):
         # beta2, etc. Scale parameters should be initialized to one and shift      #
         # parameters should be initialized to zero.                                #
         ############################################################################
+        
+        # We assume an input dimension of D, a hidden dimension of H, and perform classification over C classes.
+        D, H, C = input_dim, hidden_dims, num_classes
+        
+        # Input layer parameters: fc, bn, nl, do
+        param_in = {'W1': (np.random.randn(D, H[0]) * weight_scale),
+                    'b1': np.zeros((1, H[0]))}
+        self.params.update(param_in)
+        if self.use_batchnorm:
+            param_in_bn = {'gamma1': np.ones((1, H[0])), 
+                           'beta1': np.zeros((1, H[0]))}
+            self.params.update(param_in_bn)
+
+        # Hidden layers parameters: fc, bn, nl, do
+        for k in range(1, self.num_layers-1): # num_layers=3
+            param_h = {'W{}'.format(k+1): (np.random.randn(H[k-1], H[k]) * weight_scale),
+                       'b{}'.format(k+1): np.zeros((1, H[k]))}
+            self.params.update(param_h)
+            if self.use_batchnorm:
+                param_h_bn = {'gamma{}'.format(k+1): np.ones((1, H[k])), 
+                               'beta{}'.format(k+1): np.zeros((1, H[k]))}
+                self.params.update(param_h_bn)
+
+
+        # Output layer parameters: fc, softmax (included in loss function)
+        param_out = {'W{}'.format(self.num_layers): (np.random.randn(H[self.num_layers - 2], C) * weight_scale),
+                    'b{}'.format(self.num_layers): np.zeros((1, C))}
+        self.params.update(param_out)
+
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
@@ -189,7 +267,6 @@ class FullyConnectedNet(object):
         # Cast all parameters to the correct datatype
         for k, v in self.params.items():
             self.params[k] = v.astype(dtype)
-
 
     def loss(self, X, y=None):
         """
@@ -221,6 +298,34 @@ class FullyConnectedNet(object):
         # self.bn_params[1] to the forward pass for the second batch normalization #
         # layer, etc.                                                              #
         ############################################################################
+        caches = []
+        
+        # Input and hidden layers: lr + [bn] + nl + [do]
+        for k in range(1, self.num_layers):
+            W = self.params['W{}'.format(k)]
+            b = self.params['b{}'.format(k)]
+            y_affine, affine_cache = affine_forward(b=b, w=W, x=X)
+            if self.use_batchnorm:
+                gamma = self.params['gamma{}'.format(k)]
+                beta = self.params['beta{}'.format(k)]
+                y_affine, bn_cache = batchnorm_forward(beta=beta, bn_param=self.bn_params[k-1], 
+                                                       gamma=gamma, x=y_affine)
+            else:
+                bn_cache = None
+            y_nl, nl_cache = relu_forward(x=y_affine)
+            if self.use_dropout:
+                y_nl, do_cache = dropout_forward(dropout_param=self.dropout_param, x=y_nl)
+            else:
+                do_cache = None
+            X = y_nl.copy() # pass to the nect layer
+            cache = (affine_cache, bn_cache, nl_cache, do_cache)
+            caches.append(cache) # caches[k]
+
+        # Output layer: lr + nl(softmax) included in loss function
+        W = self.params['W{}'.format(self.num_layers)] # W3
+        b = self.params['b{}'.format(self.num_layers)] # W3
+        scores, scores_cache = affine_forward(b=b, w=W, x=X)
+
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
@@ -244,6 +349,32 @@ class FullyConnectedNet(object):
         # automated tests, make sure that your L2 regularization includes a factor #
         # of 0.5 to simplify the expression for the gradient.                      #
         ############################################################################
+        ############################################################################        
+        reg_loss = regularization(lam=self.reg, model=self.params, reg_type='l2')
+
+        loss, dy = softmax_loss(x=scores, y=y)
+        loss += reg_loss
+        
+        # Output layer
+        dX, dW, db = affine_backward(cache=scores_cache, dout=dy)
+        grads['W{}'.format(self.num_layers)] = dW # W3
+        grads['b{}'.format(self.num_layers)] = db # db3
+        dy = dX.copy() # pass to the previous layer
+        
+        # hidden layer
+        for k in reversed(range(1, self.num_layers)):
+            affine_cache, bn_cache, nl_cache, do_cache = caches[k-1]
+            if self.use_dropout:
+                dy = dropout_backward(cache=do_cache, dout=dy)
+            dy = relu_backward(cache=nl_cache, dout=dy)
+            if self.use_batchnorm:
+                dy, dgamma, dbeta = batchnorm_backward(cache=bn_cache, dout=dy)
+                grads['gamma{}'.format(k)] = dgamma
+                grads['beta{}'.format(k)] = dbeta
+            dX, dW, db = affine_backward(cache=affine_cache, dout=dy)
+            grads['W{}'.format(k)] = dW
+            grads['b{}'.format(k)] = db
+
         pass
         ############################################################################
         #                             END OF YOUR CODE                             #
