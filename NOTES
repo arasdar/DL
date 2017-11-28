@@ -11,3 +11,9 @@ git remote show origin
 # Installing homwbrew as MacOS package manager instead of apt-get
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+# How to configure git lfs or large file storage in github
+git lfs install
+git lfs track <files/folder>
+git add <files/folder> with .gitattribute
+git commit -m "message related to LFS files"
+git push
