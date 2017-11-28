@@ -20,3 +20,13 @@ data/bci/bci-project-final/BahramFace.mat filter=lfs diff=lfs merge=lfs -text
 data/bci/bci-project-final/DJFace.mat filter=lfs diff=lfs merge=lfs -text
 data/bci/bci-project-final/NickFlipped.mat filter=lfs diff=lfs merge=lfs -text
 data/bci/bci-project-data-RAW/ filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/DJFace.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/DJFlipp.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/NickFlipp.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/SarahFace.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/SarahFlipp.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/BahramFlipp.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/NickFace.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/RoohiFace.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/RoohiFlipp.mat filter=lfs diff=lfs merge=lfs -text
+data/bci/bci-project-data-RAW/BahramFace.mat filter=lfs diff=lfs merge=lfs -text
