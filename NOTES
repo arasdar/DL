@@ -12,6 +12,7 @@ git remote show origin
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
 # How to configure git lfs or large file storage in github
+Download and install GIT-LFS package/ binaries.
 git lfs install
 git lfs track <files/folder>
 git add <files/folder> with .gitattribute
