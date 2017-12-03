@@ -34,4 +34,13 @@ git lfs pull
 git lfs install --force
 This only needs to be done once to initialize the clone for the first time.
 
-Please do test it and let me know if it fixes it.
+Please do test it and let me know if it fixes it.i
+
+# Installing stuff using conda-forge
+conda-forge is a github organization containing repositories of conda recipes. 
+Thanks to some awesome continuous integration providers (AppVeyor, CircleCI and TravisCI), 
+each repository, also known as a feedstock, automatically 
+builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
+
+# Installing xelatex/texlive
+sudo apt-get install texlive-xetex
