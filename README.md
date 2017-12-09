@@ -25,7 +25,7 @@ You can use this repository to better study and learn the theoretical foundation
 4. Adagrad
 5. RMSprop
 6. Adam
-7. Adam_RNN
+7. Adam RNN
 
 #### Loss/Error functions
 1. Cross Entropy
@@ -37,7 +37,7 @@ You can use this repository to better study and learn the theoretical foundation
 #### Regularization
 1. Dropout
 2. The usual L1 and L2 regularization
-3. Dropout_SELU
+3. Dropout SELU
 
 #### Nonlinearities
 1. ReLU
@@ -85,8 +85,8 @@ You can use this repository to better study and learn the theoretical foundation
 
 ## Run
 1. Install anaconda
-2. Do conda-env create`
-3. Enter: source activate arasdar-DL-env`
+2. Do conda-env create
+3. Enter: source activate arasdar-DL-env
 4. To run, you can use either the ipynb files or the python files. 
 
 ## License
