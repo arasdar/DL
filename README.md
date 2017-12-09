@@ -1,5 +1,4 @@
 # Deep Learning
-
 This is my personal repository, dedicated to deep learning related materials.
 
 On top of the existing approaches, my own implemented DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and Python Notbook files ('.ipynb') for more readability and maintainability. 
@@ -91,4 +90,4 @@ You can use this repository to better study and learn the theoretical foundation
 4. To run, you can use either the ipynb files or the python files. 
 
 ## License
-This repository s licensed under the License <http://unlicense.org>.
+This repository is licensed under the License <http://unlicense.org>.
