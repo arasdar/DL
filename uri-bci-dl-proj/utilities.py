@@ -70,8 +70,3 @@ def get_batches(X, y, batch_size = 100):
 	# Loop over batches and yield
 	for b in range(0, len(X), batch_size):
 		yield X[b:b+batch_size], y[b:b+batch_size]
-	
-
-
-
-
