@@ -1,5 +1,5 @@
-This is the overall structure of a research project related to the BCI and DL courses.
-The presentation is in Google drive in Word, ... in Cloud.
-The paper is being developed and saved in Overleaf in LaTex in Cloud using both overleaf and sharedLaTex.
-The code/ impl/ misc/ data are all being developed in GitHub Cloud after expriencing hg-Mercurial and svn-Subversion repositories.
-The code is being developed in Python/ openSourced, using Anaconda for virtual env creation, and ipynb using ipython kernel IDE/ interactive python.
+This is the research project related to the BCI and DL courses in URI.
+The presentation is stored and being developed in Google drive cloud.
+The paper is sored and being developed in Overleaf cloud using both overleaf and sharedLaTex.
+The code and implementation is stored and being developed in GitHub repository Cloud after expriencing hg-Mercurial and svn-Subversion repositories.
+The code is written and being developed in Python using Anaconda for virtual env creation, and '.ipynb' using ipython kernel as an interactive python programming/ developement environment.
