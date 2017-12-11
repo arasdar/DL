@@ -1,0 +1,2 @@
+model_checkpoint_path: "face-yalda.ckpt"
+all_model_checkpoint_paths: "face-yalda.ckpt"
