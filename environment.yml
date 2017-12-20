@@ -1,15 +1,9 @@
 name: arasdar-DL-env
 dependencies:
-- python=3.5.1
-- numpy=1.11.0
-- scikit-learn=0.17.1
-- scipy=0.17.1
-- matplotlib=1.5.3
-- pip:
-    - keras==1.1.1
-    - tensorflow==1.0
-- jupyter
+- python
+- numpy
+- scipy
 - pandas
-- numba
-- cudatoolkit
-- pyculib
+- matplotlib
+- jupyter
+- notebook
