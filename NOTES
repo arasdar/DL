@@ -5,6 +5,9 @@ conda install tensorflow-GPU <GPU>
 # How to update Anaconda -- this was the actual command I typed and worked!
 conda update --prefix ~/anaconda3 anaconda
 
+# Please update conda by running
+conda update -n base conda
+
 # For numba and cuda-python programming:
 sudo apt-get install nvidia-modprobe
 This does magic in recognizing the GPU-device in the system!
