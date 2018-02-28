@@ -1,0 +1,11 @@
+# installing eclipse for c++
+sudo apt-get install eclipse eclipse-cdt
+
+# Snap and snapcraft
+snapcraft init
+snapcraft
+snapcraft login
+snapcraft register app-name
+snapcraft push app-name_versions.snap
+snapcraft release revision=<1, 2, 3> channel=<stable, edge, candidate, ..>
+snap install app-name --channel=<channel-mode>
