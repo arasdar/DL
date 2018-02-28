@@ -1,0 +1,19 @@
+# Name                Version        Rev   Developer  Notes
+# my-finroc-snap      0.1            2     arasdar    devmode
+name: my-finroc-snap
+version: 0.1
+summary: my-finroc-snap summary
+description: my-finroc-snap description
+
+grade: devel # stable is default
+confinement: devmode # strict is default
+
+parts:
+  part-name:
+    source: /home/arasdar/finroc2/export/linux_x86_64_debug/bin/
+    plugin: dump
+
+apps:
+  app-name:
+    command: finroc_crash_course
+    plugs: [network-bind]

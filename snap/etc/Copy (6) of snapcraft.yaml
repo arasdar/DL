@@ -1,0 +1,19 @@
+name: my-test-snap
+version: 1.0
+summary: my-test-snap summary
+description: my-test-snap description
+
+parts:
+  part: 
+    source: /home/arasdar/finroc2/export/linux_x86_64_debug/bin/
+    plugin: dump
+            
+apps:
+  app:
+    command: finroc_crash_course
+    plugs: 
+      - network-bind
+#    daemon: simple
+#    plugs: [network-bind]
+#    plugs:
+#      - network

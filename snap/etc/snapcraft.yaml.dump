@@ -1,0 +1,9 @@
+name: test
+version: 1
+summary: test
+description: test
+
+parts:
+  foo:
+    source: /home/arasdar/finroc/etc
+    plugin: dump

@@ -1,0 +1,75 @@
+name: my-test-snap
+version: 1.0
+summary: my-test-snap summary
+description: my-finroc-snap description
+
+# Stable/ edge/ candidate
+# devmode/ strict mode
+#"confinement" property not specified: defaulting to "strict"
+#"grade" property not specified: defaulting to "stable"
+
+#Preparing to pull part-name 
+#Pulling part-name 
+#Preparing to build part-name 
+#Building part-name 
+#Staging part-name 
+#Priming part-name 
+#Snapping 'my-test-snap' |                                                                                                                                                                     
+#Snapped my-test-snap_1.0_amd64.snap
+
+#Cleaning up priming area
+#Cleaning up staging area
+#Cleaning up parts directory
+
+#parts:
+#  part-name:
+#    source: /home/arasdar/finroc
+#    plugin: dump
+#    build: |
+#      make clean # getting rid of export and build
+#      cd make_builder/
+#      ant clean # clean make_builder
+#      cd ../
+#      make libdb
+#      make -j40
+      
+parts:
+  part-name:    
+    source: ./
+    plugin: dump
+    prepare: |
+#      cp /home/arasdar/finroc/export/java/*.jar ./ -r
+#      cp /home/arasdar/finroc/export/linux_x86_64_debug/lib ./ -r
+      cp /home/arasdar/finroc/export/linux_x86_64_debug/bin/finroc_crash_course ./
+#      cp /home/arasdar/finroc/export/linux_x86_64_debug/share ./ -r
+#      cp /home/arasdar/finroc/sources/cpp/projects/crash_course/ ./ -r
+      
+#apps:
+#  app-name:
+##    command: finroc/export/linux_x86_64_debug/bin/finroc_crash_course
+#    command: bin/finroc_crash_course
+#    command: finroc_crash_course
+    
+# Aftering building the snap
+#"confinement" property not specified: defaulting to "strict"
+#"grade" property not specified: defaulting to "stable"
+#Preparing to pull part-name 
+#Pulling part-name 
+#Preparing to build part-name 
+#Building part-name 
+#Staging part-name 
+#Priming part-name 
+#Files from the build host were migrated into the snap to satisfy dependencies that would otherwise not be met. 
+#This feature will be removed in a future release. 
+#If these libraries are needed in the final snap, ensure that the following are either satisfied by a stage-packages entry or through a part:
+#snap/core/current/lib/i386-linux-gnu/libgcc_s.so.1
+#snap/core/current/lib/x86_64-linux-gnu/libbz2.so.1.0
+#snap/core/current/lib/x86_64-linux-gnu/liblzma.so.5
+#snap/core/current/lib/x86_64-linux-gnu/libz.so.1
+#snap/core/current/usr/lib/x86_64-linux-gnu/libstdc++.so.6
+#usr/lib/x86_64-linux-gnu/libboost_iostreams.so.1.54.0
+#usr/lib/x86_64-linux-gnu/libboost_system.so.1.54.0
+#usr/lib/x86_64-linux-gnu/libcppunit-1.13.so.0
+#usr/lib/x86_64-linux-gnu/libxml2.so.2
+#Snapping 'my-test-snap' \                                                                                                                                                                     
+#Snapped my-test-snap_1.0_amd64.snap
