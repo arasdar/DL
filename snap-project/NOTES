@@ -9,3 +9,8 @@ snapcraft register app-name
 snapcraft push app-name_versions.snap
 snapcraft release revision=<1, 2, 3> channel=<stable, edge, candidate, ..>
 snap install app-name --channel=<channel-mode>
+
+# Different ways of copying in the shell
+cp -r or -R dir-src dir-tgt
+rsync -a --exclusion=dir-to-exclude dir-src dir-tgt
+dd if=ubuntu-desktop-x86-64.iso or ubuntu-core-x86-64.img of=/dev/sdb

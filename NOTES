@@ -52,3 +52,14 @@ builds its own recipe in a clean and repeatable way on Windows, Linux and OSX.
 
 # Installing xelatex/texlive
 sudo apt-get install texlive-xetex
+
+# how to format the usb drive in linux
+lsblk # list the disk block storage
+sudo dd if=/dev/zero of=/dev/sdb bs=1024 or 2K or 25M
+sudo dd if=ubunutu.core of=/dev/sdb bs=25M
+fdisk /dev/sdb # format disk
+n # new partition
+w # write the disk into partition?
+sudo dd if=ubunutu-core-amd64-x86-64-i386 of=/dev/sdb or sdc bs=32M or 1024 or 1K or 1M
+sync # synchronizing disk with what???
+sudo eject /dev/sdc
