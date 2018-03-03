@@ -1,7 +1,7 @@
-name: my-finroc-snaptest
+name: my-finroc-snaptest-app
 version: 1
-summary: my-finroc-snaptest summary
-description: my-finroc-snaptest description
+summary: my-finroc-snaptest-app summary
+description: my-finroc-snaptest-app description
 
 #"confinement" property not specified: defaulting to "strict"
 #"grade" property not specified: defaulting to "stable"
@@ -10,7 +10,7 @@ description: my-finroc-snaptest description
 
 parts:
   part-name:
-    source: /home/arasdar/finroc5/export/linux_x86_64_debug/bin/
+    source: /home/arasdar/finroc/export/linux_x86_64_debug/bin/
     plugin: dump
 
 apps:
