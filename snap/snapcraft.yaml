@@ -10,7 +10,7 @@ description: my-finroc-snaptest description
 
 parts:
   part-name:
-    source: /home/arasdar/finroc5/export/linux_x86_64_debug/bin/
+    source: /home/arasdar/finroc/export/linux_x86_64_debug/bin/
     plugin: dump
 
 apps:
