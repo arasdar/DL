@@ -80,3 +80,7 @@ snap install app-name --channel=<channel-mode>
 cp -r or -R dir-src dir-tgt
 rsync -a --exclusion=dir-to-exclude dir-src dir-tgt
 dd if=ubuntu-desktop-x86-64.iso or ubuntu-core-x86-64.img of=/dev/sdb
+
+# Architecture I am familiar with now
+arm, amd64/32 or x86_64/32 or i686 for intell
+qualcomm is also another one.

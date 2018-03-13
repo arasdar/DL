@@ -1,0 +1,9 @@
+CFLAGS=-ggdb -ftrack-macro-expansion=0
+CXXFLAGS=$(CFLAGS) -std=c++11
+NVCC_FLAGS=-g -G
+LIBNAME_CUDART=cudart
+LIBNAME_CUFFT=cufft
+
+CC=arm-linux-gnueabihf-gcc
+CXX=arm-linux-gnueabihf-g++
+LD=arm-linux-gnueabihf-ld
