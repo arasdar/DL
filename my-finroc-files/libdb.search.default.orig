@@ -1,0 +1,16 @@
+#!/bin/bash
+
+set -o verbose #echo on
+
+# C/C++
+find -L ${SYSTEM_ROOT}/usr/lib/gcc-cross -regex '.*\([.]\(h\|so\|hpp\|jar\|a\)\)'
+find -L ${SYSTEM_ROOT}/usr/arm-linux-gnueabihf -regex '.*\([.]\(h\|so\|hpp\|jar\|a\)\)'
+find -L ${SYSTEM_ROOT}/usr/lib/arm-linux -regex '.*\([.]\(h\|so\|hpp\|jar\|a\)\)'
+
+# Java
+find -L ${SYSTEM_ROOT}/usr/lib/jvm/default-java -regex '.*\([.]\(h\|so\|hpp\|jar\|a\)\)'
+find -L ${SYSTEM_ROOT}/usr/share/java -regex '.*\([.]\(h\|so\|hpp\|jar\|a\)\)'
+
+set +o verbose #echo off
+
+

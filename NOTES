@@ -84,3 +84,12 @@ dd if=ubuntu-desktop-x86-64.iso or ubuntu-core-x86-64.img of=/dev/sdb
 # Architecture I am familiar with now
 arm, amd64/32 or x86_64/32 or i686 for intell
 qualcomm is also another one.
+
+## Lib Dynamic Dependencies
+arm-linux-gnueabihf-readelf -a finroc_crash_course | grep NEEDED # for arm
+ldd # for amd/intel arch
+
+# ssh into arm and amd/intel
+# ssh into rasberry pie and laptop
+raspie-config for ssh enable
+install openSSH and systemctl enable ssh

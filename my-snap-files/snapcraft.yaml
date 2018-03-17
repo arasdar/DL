@@ -1,0 +1,37 @@
+name: my-finroc-snaptest-app
+version: 1
+summary: my-finroc-snaptest-app summary
+description: my-finroc-snaptest-app description
+
+#"confinement" property not specified: defaulting to "strict"
+#"grade" property not specified: defaulting to "stable"
+#grade: devel # or stable is default
+#confinement: devmode # or strict is default
+
+#Files from the build host were migrated into the snap to satisfy dependencies that would otherwise not be met. 
+#This feature will be removed in a future release. 
+#If these libraries are needed in the final snap, 
+#ensure that the following are either satisfied by a stage-packages entry or through a part:
+
+parts:
+  part-name:
+    plugin: dump
+    source: ./
+    prepare: |
+      cp /home/arasdar/finroc/export/linux_arm_debug/bin/finroc_crash_course ./
+      #cp /home/arasdar/finroc/export/linux_arm_debug/lib ./lib -R
+      #cp /usr/lib/arm-linux/lib/lib* ./lib
+                
+apps:
+  app-name:
+    command: finroc_crash_course
+    plugs: [network-bind] # server and the client is just network
+    #environment: 
+      #LD_LIBRARY_PATH: $LD_LIBRARY_PATH:$SNAP
+      
+      
+# snapcraft clean
+# snapcraft --target-arch=arm --debug/or not
+# snapcraft register
+# snapcraft push my-snap-file
+# snapcraft release my-snap-name version stable/devel
