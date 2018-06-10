@@ -1,3 +1,6 @@
+# Mujoco get id problem with chmod
+chmod u=rwx getid_linux 
+
 # FOr ssh tunelling for jupyter notebook
 arasdar@amd64-UbuntuDesktop-16:~$ ssh -N -f -L localhost:8889:localhost:8888 131.128.51.143
 
