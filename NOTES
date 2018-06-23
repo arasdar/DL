@@ -3,6 +3,10 @@ chmod u=rwx getid_linux
 
 # FOr ssh tunelling for jupyter notebook
 arasdar@amd64-UbuntuDesktop-16:~$ ssh -N -f -L localhost:8889:localhost:8888 131.128.51.143
+arasdar@amd64-UbuntuDesktop-16:~$ ssh -N -f -L localhost:8889:localhost:8888 131.128.51.143
+This has been tested multiple times.
+Run jupyter-notebook in he remote host and the above command on local host.
+Open the browser and change the port from 8889 to 8888.
 
 # For tensorflow installation
 conda install tensorflow <CPU>
