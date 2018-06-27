@@ -1,3 +1,7 @@
+# To find and rm a folder/directory
+find ./ -name 20* -exec rm -r {} \;
+
+
 # Mujoco get id problem with chmod
 chmod u=rwx getid_linux 
 
