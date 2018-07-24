@@ -1,6 +1,14 @@
+find . | grep req
+./udacity-dl/GAN/floyd_requirements.txt
+./uri-dl/uri-dl-hw-2/assignment2/requirements.txt
+
+find . -name *req*
+./udacity-dl/GAN/floyd_requirements.txt
+./uri-dl/uri-dl-hw-2/assignment2/requirements.txt
+arasdar@amd64-ubuntuDesktop-16:~/github/arasdar-DL-git$ 
+
 # To find and rm a folder/directory
 find ./ -name 20* -exec rm -r {} \;
-
 
 # Mujoco get id problem with chmod
 chmod u=rwx getid_linux 
