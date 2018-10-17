@@ -1,3 +1,7 @@
+# Installing the nvidia driver compatible with cuda9.2 and tensorflow-1.11
+sudo apt-add-repository ppa:graphics-drivers/ppa -y
+
+
 find . | grep req
 ./udacity-dl/GAN/floyd_requirements.txt
 ./uri-dl/uri-dl-hw-2/assignment2/requirements.txt
