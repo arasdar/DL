@@ -5,7 +5,7 @@ On top of the existing approaches, my own implemented DL algorithms were also ex
 
 This repository will be continuously improved, maintained, and debugged over time, but is meant for learning and prototyping DL approaches and NOT for production.
 
-You can use this repository to better study and learn the theoretical foundations of deep learning in Neural Networks in practice, such as data preparation, building neural network architectures, backpropagation-based learning approaches, and how to run training sessions in deep NN architectures. 
+You can use this repository to better study and learn the theoretical foundations of deep learning in Neural Networks in practice, such as data preparation, building neural network architectures, backpropagation-based learning approaches, and running training sessions for deep NN architectures. 
 
 #### Neural Network Architectures
 1. Convolutional NN
