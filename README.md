@@ -1,11 +1,11 @@
-# Deep Learning
-This is my personal repository, dedicated to deep learning related materials.
+# Deep Learning (DL) and Neural Networks (NN)
+This repository is dedicated to implementing DL/NN-related materials such as MLP (Backpropagation), CNN (ConvNet), and RNN (LSTM, GRU, Attention).
 
-On top of the existing approaches, my own implemented DL algorithms were also extensively added to this repository such as NN, CNN, and RNN folders and Python Notbook files ('.ipynb') for more readability and maintainability. 
+On top of the existing approaches, my own implemented DL algorithms were also extensively added to this repository, such as NN, CNN, and RNN folders and Python Notebook files ('.ipynb') for better readability and maintainability. 
 
-This repository will be continuously improved, maintained, and debugged over time but is meant for learning and prototyping the DL approachs and NOT meant for production.
+This repository will be continuously improved, maintained, and debugged over time, but is meant for learning and prototyping DL approaches and NOT for production.
 
-You can use this repository to better study and learn the theoretical foundation of deep learning in Neural Networds in practice such as the data preperation, building neural netowork architectures, backprp-based learning approaches, and how to run the learning session in deep NN architecture. 
+You can use this repository to better study and learn the theoretical foundations of deep learning in Neural Networks in practice, such as data preparation, building neural network architectures, backpropagation-based learning approaches, and how to run training sessions in deep NN architectures. 
 
 #### Neural Network Architectures
 1. Convolutional NN
@@ -44,13 +44,13 @@ You can use this repository to better study and learn the theoretical foundation
 2. Leaky ReLU
 3. Sigmoid
 4. Tanh
-5. PReLU: Parameteric ReLU or maxout network
-6. Fully learable PReLU
+5. PReLU: Parametric ReLU or maxout network
+6. Fully learnable PReLU
 7. Softplus: Integral-Sigmoid/Softmax
 8. Softmax for multiple-output classification
 9. Integ-Tanh: Integral of Tanh
 10. Fully Learnable PReLU
-11. ELU: Exponentioal Linear Unit
+11. ELU: Exponential Linear Unit
 11. SELU: Scaled ELU
 
 #### Normalization and initialization techniques
@@ -61,18 +61,18 @@ You can use this repository to better study and learn the theoretical foundation
 1. Max pooling
 2. Average pooling
 
-### Tensorflow-based implementations
-1. CNN for mnist by Wiseodd
-2. Autoencoder for mnist by Wiseodd
+### TensorFlow-based implementations
+1. CNN for MNIST by Wiseodd
+2. Autoencoder for MNIST by Wiseodd
 3. RNN by Wiseodd
 3. RNN for script-generation- Deep Unsupervised Learning
 4. RNN for sequence-to-sequence (seq2seq) learning for langugae translation
-5. GAN for face generation on CelebA and mnist dataset
+5. GAN for face generation on CelebA and MNIST dataset
 6. CNN for image classification on CIFAR dataset.
 7. RNN for time-series data or historical data sequence learning
 
 ### Datasets
-4. Mnist - automatic download
+4. MNIST - automatic download
 5. CelebA - automatic download
 6. CIFAR - automatic download
 
@@ -84,10 +84,12 @@ You can use this repository to better study and learn the theoretical foundation
 2. Courses indirectly related to DL (DL-related projects or applications)
 
 ## Run
-1. Install anaconda
-2. Do conda-env create
+1. Install Anaconda
+2. Do conda env create
 3. Enter: source activate arasdar-DL-env
 4. To run, you can use either the ipynb files or the python files. 
 
 ## License
 This repository is licensed under the License <http://unlicense.org>.
+The WISEODD repository inspires this repository's implementation.
+Andrej Karpathy's implementation also inspires this repository.
